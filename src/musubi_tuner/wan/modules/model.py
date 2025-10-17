@@ -549,7 +549,7 @@ class WanModel(nn.Module):  # ModelMixin, ConfigMixin):
         model_version="2.1",  # New!
         patch_size=(1, 2, 2),
         text_len=512,
-        in_dim=36,  # <-- changed from 16 to 36
+        in_dim=36,  # <-- changed from 16 to 36 for low only
         dim=2048,
         ffn_dim=8192,
         freq_dim=256,
@@ -605,6 +605,7 @@ class WanModel(nn.Module):  # ModelMixin, ConfigMixin):
         super().__init__()
 
         assert model_type in ["t2v", "i2v", "flf2v"], f"Invalid model_type: {model_type}. Must be one of ['t2v', 'i2v', 'flf2v']."
+        
         self.model_type = model_type
         self.model_version = model_version  # New!
 
@@ -1001,9 +1002,16 @@ def load_wan_model(
     loading_device = torch.device(loading_device)
 
     with init_empty_weights():
+        # Ensure in_dim is set to 36 if not present
+        if not hasattr(config, "in_dim") or config.in_dim is None:
+            config.in_dim = 36
         logger.info(
             f"Creating WanModel. I2V: {config.i2v}, FLF2V: {config.flf2v}, V2.2: {config.v2_2}, device: {device}, loading_device: {loading_device}, fp8_scaled: {fp8_scaled}"
         )
+        print(config.dim, "dit_path:", dit_path)
+        if config.i2v and "high" in dit_path:
+            config.dim =16
+        print(config.dim, "dit_path:", dit_path)
         model = WanModel(
             model_type="i2v" if config.i2v else ("flf2v" if config.flf2v else "t2v"),
             model_version="2.1" if not config.v2_2 else "2.2",
