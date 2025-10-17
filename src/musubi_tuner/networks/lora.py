@@ -133,7 +133,7 @@ class LoRAModule(torch.nn.Module):
             print(self.rank_dropout , lx.shape, x.shape, " \nself.multiplier", self.multiplier, scale, self.lora_dim)
             logger.error(f"LoRA forward: {lx.shape}, {x.shape}, {self.multiplier}, {scale}, {self.lora_dim}")
             """
-            torch.Size([1, 69768, 5120]) torch.Size([1, 69768, 5120])
+            None torch.Size([1, 69768, 5120]) torch.Size([1, 69768, 13824])
             self.multiplier 1.0 0.5 2
             """
             #assert 1==2
@@ -908,10 +908,10 @@ def create_network_from_weights(
         elif "lora_down" in key:
             dim = value.shape[0]
             modules_dim[lora_name] = dim
-            # logger.info(lora_name, value.size(), dim)
+            logger.info(lora_name, value.size(), dim)
 
     module_class = LoRAInfModule if for_inference else LoRAModule
-
+    print(modules_dim, modules_alpha,  "\n__modules_alpha", "alpha" in key, )
     network = LoRANetwork(
         target_replace_modules,
         "lora_unet",
