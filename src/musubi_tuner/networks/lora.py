@@ -130,7 +130,7 @@ class LoRAModule(torch.nn.Module):
                 scale = self.scale
 
             lx = self.lora_up(lx)
-            print(self.rank_dropout , mask.shape, lx.shape, x.shape, " \nself.multiplier", self.multiplier, scale, self.lora_dim)
+            print(self.rank_dropout , lx.shape, x.shape, " \nself.multiplier", self.multiplier, scale, self.lora_dim)
             logger.error(f"LoRA forward: {lx.shape}, {x.shape}, {self.multiplier}, {scale}, {self.lora_dim}")
             """
             torch.Size([1, 69768, 5120]) torch.Size([1, 69768, 5120])
