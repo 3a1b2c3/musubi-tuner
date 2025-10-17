@@ -428,7 +428,7 @@ class LoRANetwork(torch.nn.Module):
         text_encoders: Union[List[CLIPTextModel], CLIPTextModel],
         unet: nn.Module,
         multiplier: float = 1.0,
-        lora_dim: int = 4,
+        lora_dim: int = 2,
         alpha: float = 1,
         dropout: Optional[float] = None,
         rank_dropout: Optional[float] = None,
