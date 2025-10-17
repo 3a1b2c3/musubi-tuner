@@ -1008,7 +1008,7 @@ def load_wan_model(
         logger.info(
             f"Creating WanModel. I2V: {config.i2v}, FLF2V: {config.flf2v}, V2.2: {config.v2_2}, device: {device}, loading_device: {loading_device}, fp8_scaled: {fp8_scaled}"
         )
-        print(config.dim, "dit_path:", dit_path)
+        print(config.dim, "\n___dit_path:", dit_path)
         if config.i2v and "high" in dit_path:
             config.dim =16
         print(config.dim, "dit_path:", dit_path)
