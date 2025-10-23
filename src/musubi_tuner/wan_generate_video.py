@@ -34,7 +34,7 @@ from musubi_tuner.modules.scheduling_flow_match_discrete import FlowMatchDiscret
 from musubi_tuner.wan.utils.fm_solvers import FlowDPMSolverMultistepScheduler, get_sampling_sigmas, retrieve_timesteps
 from musubi_tuner.wan.utils.fm_solvers_unipc import FlowUniPCMultistepScheduler
 
-lycoris_available = find_spec("lycoris") is not None
+lycoris_available = False #find_spec("lycoris") is not None
 if lycoris_available:
     from lycoris.kohya import create_network_from_weights
 
