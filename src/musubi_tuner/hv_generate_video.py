@@ -29,7 +29,7 @@ from musubi_tuner.hunyuan_model.fp8_optimization import convert_fp8_linear
 from musubi_tuner.modules.scheduling_flow_match_discrete import FlowMatchDiscreteScheduler
 from musubi_tuner.networks import lora
 
-lycoris_available = find_spec("lycoris") is not None
+lycoris_available = False #find_spec("lycoris") is not None
 if lycoris_available:
     from lycoris.kohya import create_network_from_weights
 
